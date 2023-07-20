@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Notification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Hello World
+            </h1>
+            <p class="subtitle">
+                My first website with <strong>Bulma</strong>!
+            </p>
+        </div>
+        <br />
+        <buton class="button" onclick="notifyMe()">Notify Me</buton>
+    </section>
+
+    <script>
+        if (!window.Notification) {
+            console.log('Browser does not support notifications.');
+        } else {
+            // check if permission is already granted
+            if (Notification.permission === 'granted') {
+                // show notification here
+            } else {
+                // request permission from user
+                Notification.requestPermission().then(function (p) {
+                    if (p === 'granted') {
+                        // show notification here
+                    } else {
+                        console.log('User blocked notifications.');
+                    }
+                }).catch(function (err) {
+                    console.error(err);
+                });
+            }
+        }
+
+        function notifyMe() {
+            if (!window.Notification) {
+                console.log('Browser does not support notifications.');
+            } else {
+                // check if permission is already granted
+                if (Notification.permission === 'granted') {
+                    // show notification here
+                    var notify = new Notification('Hi there!', {
+                        body: 'How are you doing?',
+                        icon: 'https://t4.ftcdn.net/jpg/03/31/84/47/360_F_331844776_sU4f3bWxu2zwKsqnNdJvjEcmlbj0hVSP.jpg',
+                    });
+                } else {
+                    // request permission from user
+                    Notification.requestPermission().then(function (p) {
+                        if (p === 'granted') {
+                            // show notification here
+                            var notify = new Notification('Hi there!', {
+                                body: 'How are you doing?',
+                                icon: 'https://t4.ftcdn.net/jpg/03/31/84/47/360_F_331844776_sU4f3bWxu2zwKsqnNdJvjEcmlbj0hVSP.jpg',
+                            });
+                        } else {
+                            console.log('User blocked notifications.');
+                        }
+                    }).catch(function (err) {
+                        console.error(err);
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
